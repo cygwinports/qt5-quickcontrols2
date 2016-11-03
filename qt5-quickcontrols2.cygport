@@ -1,0 +1,51 @@
+inherit qt5-qmake
+
+NAME="qt5-quickcontrols2"
+VERSION=5.6.2
+RELEASE=1
+CATEGORY="X11"
+SUMMARY="Qt C++ application framework (QtLabs controls)"
+DESCRIPTION="Qt is a cross-platform application framework for desktop and
+embedded development. Qt enables programmers to create advanced GUI
+applications once and deploy them to Windows, Mac OS X and Linux without
+rewriting the source code. Companies using Qt can leverage software
+investments made on one platform across many others."
+HOMEPAGE="https://www.qt.io/"
+SRC_URI="http://download.qt.io/official_releases/qt/${VERSION%.*}/${VERSION}/submodules/qtquickcontrols2-opensource-src-${VERSION}.tar.xz"
+SRC_DIR="qtquickcontrols2-opensource-src-${VERSION}"
+PATCH_URI="5.6.2-as-needed.patch"
+
+PKG_NAMES="${NAME} libQt5LabsTemplates5 libQt5LabsTemplates-devel ${NAME}-doc ${NAME}-examples"
+qt5_quickcontrols2_CONTENTS="usr/lib/qt5/qml/Qt/labs/ usr/share/doc/${NAME}/"
+libQt5LabsTemplates5_CATEGORY="Libs"
+libQt5LabsTemplates5_CONTENTS="usr/bin/cygQt5LabsTemplates-5.dll"
+libQt5LabsTemplates_devel_CATEGORY="Libs"
+libQt5LabsTemplates_devel_REQUIRES="libQt5Quick-devel"
+libQt5LabsTemplates_devel_CONTENTS="
+	usr/include/qt5/QtLabsControls/
+	usr/include/qt5/QtLabsTemplates/
+	usr/lib/libQt5LabsControls.a
+	usr/lib/libQt5LabsControls.prl
+	usr/lib/libQt5LabsTemplates.dll.a
+	usr/lib/libQt5LabsTemplates.prl
+	usr/lib/qt5/mkspecs/modules/qt_lib_labscontrols_private.pri
+	usr/lib/qt5/mkspecs/modules/qt_lib_labstemplates_private.pri
+"
+qt5_quickcontrols2_doc_CATEGORY="Doc"
+qt5_quickcontrols2_doc_CONTENTS="usr/share/qt5/doc/qtlabscontrols*"
+qt5_quickcontrols2_examples_REQUIRES=${NAME}
+qt5_quickcontrols2_examples_CONTENTS="usr/lib/qt5/examples/quickcontrols2/"
+
+DIFF_EXCLUDES="doc"
+
+src_compile() {
+	cd ${B}
+	cygqmake5 ${S}
+	cygmake
+	cygmake docs
+}
+
+src_install() {
+	cd ${B}
+	qt5_qmake_install install_docs
+}
