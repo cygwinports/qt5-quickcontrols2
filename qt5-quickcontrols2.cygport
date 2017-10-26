@@ -1,10 +1,10 @@
 inherit qt5-qmake
 
 NAME="qt5-quickcontrols2"
-VERSION=5.6.2
+VERSION=5.9.2
 RELEASE=1
 CATEGORY="X11"
-SUMMARY="Qt C++ application framework (QtLabs controls)"
+SUMMARY="Qt C++ application framework (QtQuick2 controls)"
 DESCRIPTION="Qt is a cross-platform application framework for desktop and
 embedded development. Qt enables programmers to create advanced GUI
 applications once and deploy them to Windows, Mac OS X and Linux without
@@ -13,26 +13,39 @@ investments made on one platform across many others."
 HOMEPAGE="https://www.qt.io/"
 SRC_URI="http://download.qt.io/official_releases/qt/${VERSION%.*}/${VERSION}/submodules/qtquickcontrols2-opensource-src-${VERSION}.tar.xz"
 SRC_DIR="qtquickcontrols2-opensource-src-${VERSION}"
-PATCH_URI="5.6.2-as-needed.patch"
+#PATCH_URI="5.6.2-as-needed.patch"
 
-PKG_NAMES="${NAME} libQt5LabsTemplates5 libQt5LabsTemplates-devel ${NAME}-doc ${NAME}-examples"
-qt5_quickcontrols2_CONTENTS="usr/lib/qt5/qml/Qt/labs/ usr/share/doc/${NAME}/"
-libQt5LabsTemplates5_CATEGORY="Libs"
-libQt5LabsTemplates5_CONTENTS="usr/bin/cygQt5LabsTemplates-5.dll"
-libQt5LabsTemplates_devel_CATEGORY="Libs"
-libQt5LabsTemplates_devel_REQUIRES="libQt5Quick-devel"
-libQt5LabsTemplates_devel_CONTENTS="
-	usr/include/qt5/QtLabsControls/
-	usr/include/qt5/QtLabsTemplates/
-	usr/lib/libQt5LabsControls.a
-	usr/lib/libQt5LabsControls.prl
-	usr/lib/libQt5LabsTemplates.dll.a
-	usr/lib/libQt5LabsTemplates.prl
-	usr/lib/qt5/mkspecs/modules/qt_lib_labscontrols_private.pri
-	usr/lib/qt5/mkspecs/modules/qt_lib_labstemplates_private.pri
+PKG_NAMES="${NAME} libQt5QuickControls2_5 libQt5QuickControls2-devel ${NAME}-doc ${NAME}-examples"
+qt5_quickcontrols2_CONTENTS="
+	usr/lib/qt5/qml/Qt/labs/
+	usr/lib/qt5/qml/QtQuick/Controls.2/
+	usr/lib/qt5/qml/QtQuick/Templates.2/
+	usr/share/doc/${NAME}/
+"
+libQt5QuickControls2_5_CATEGORY="Libs"
+libQt5QuickControls2_5_OBSOLETES="libQt5LabsTemplates5"
+libQt5QuickControls2_5_CONTENTS="
+	usr/bin/cygQt5QuickControls2-5.dll
+	usr/bin/cygQt5QuickTemplates2-5.dll
+"
+libQt5QuickControls2_devel_CATEGORY="Libs"
+libQt5QuickControls2_devel_OBSOLETES="libQt5LabsTemplates-devel"
+libQt5QuickControls2_devel_REQUIRES="libQt5Quick-devel"
+libQt5QuickControls2_devel_CONTENTS="
+	usr/include/qt5/QtQuickControls2/
+	usr/include/qt5/QtQuickTemplates2/
+	usr/lib/cmake/Qt5QuickControls2/
+	usr/lib/libQt5QuickControls2.dll.a
+	usr/lib/libQt5QuickControls2.prl
+	usr/lib/libQt5QuickTemplates2.dll.a
+	usr/lib/libQt5QuickTemplates2.prl
+	usr/lib/pkgconfig/Qt5QuickControls2.pc
+	usr/lib/qt5/mkspecs/modules/qt_lib_quickcontrols2.pri
+	usr/lib/qt5/mkspecs/modules/qt_lib_quickcontrols2_private.pri
+	usr/lib/qt5/mkspecs/modules/qt_lib_quicktemplates2_private.pri
 "
 qt5_quickcontrols2_doc_CATEGORY="Doc"
-qt5_quickcontrols2_doc_CONTENTS="usr/share/qt5/doc/qtlabscontrols*"
+qt5_quickcontrols2_doc_CONTENTS="usr/share/qt5/doc/qt*"
 qt5_quickcontrols2_examples_REQUIRES=${NAME}
 qt5_quickcontrols2_examples_CONTENTS="usr/lib/qt5/examples/quickcontrols2/"
 
