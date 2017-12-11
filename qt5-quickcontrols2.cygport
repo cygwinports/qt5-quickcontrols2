@@ -1,7 +1,7 @@
 inherit qt5-qmake
 
 NAME="qt5-quickcontrols2"
-VERSION=5.9.2
+VERSION=5.9.3
 RELEASE=1
 CATEGORY="X11"
 SUMMARY="Qt C++ application framework (QtQuick2 controls)"
@@ -13,7 +13,6 @@ investments made on one platform across many others."
 HOMEPAGE="https://www.qt.io/"
 SRC_URI="http://download.qt.io/official_releases/qt/${VERSION%.*}/${VERSION}/submodules/qtquickcontrols2-opensource-src-${VERSION}.tar.xz"
 SRC_DIR="qtquickcontrols2-opensource-src-${VERSION}"
-#PATCH_URI="5.6.2-as-needed.patch"
 
 PKG_NAMES="${NAME} libQt5QuickControls2_5 libQt5QuickControls2-devel ${NAME}-doc ${NAME}-examples"
 qt5_quickcontrols2_CONTENTS="
